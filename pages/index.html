@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pract01</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div id="app">
+        <nav>
+            <div class="menu_button main_menu open_menu">
+                <div class="menu_dash"></div>
+                <div class="menu_dash"></div>
+                <div class="menu_dash"></div>
+            </div>
+            <div class="title_search">
+                <b>TODO APP</b>
+                <div class="search">
+                    <label for="search">
+                        <div class="search_btn">
+                        <img src="../assets/images/icons8-search-96.png" alt="">
+                        </div>
+                        <input type="search" placeholder="Search" id="searchbar">
+                    </label>
+                </div>
+            </div>
+            <div class="menu_tray">
+                <header>
+                    <h1>Menu</h1>
+                    <div class="close">
+                        <img src="../assets/images/cancel.png">
+                    </div>
+                </header>
+                <div class="body">
+                    <a class="active">
+                        <i>Home</i>
+                    </a>
+                    <a>
+                        <i>Me</i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <main id="main">
+            <div class="main_route">
+                <div id="me"></div>
+            </div>
+            <div class="main_action">
+                <div class="box_cont">
+                    <div class="img openAddNewTodo">
+                        <img src="../assets/images/add.png">
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="../assets/js/index.js"></script>
+</body>
+</html>

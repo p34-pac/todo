@@ -1,0 +1,435 @@
+body{
+    width: 100%;
+    height: 100%;
+    background-color: grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#app{
+    
+    height: 570px;
+    width: 300px;
+    background-color: aliceblue;
+    box-shadow: 10px 10px 10px rgb(46, 46, 46);
+    border-radius: 20px;
+    overflow: hidden;
+    position: absolute;
+    top: 5%;
+}
+nav{
+    width: 100%;
+    height: 10%;
+    background-color: rgba(97, 99, 99, 0.705);
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+}
+.menu_button{
+    width: 20px;
+    height: 30px;
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0 2px 0 2px;
+}
+.menu_dash{
+    width: 100%;
+    height: 2px;
+    background-color: black;
+}
+.main_menu:hover{
+    transform: rotate(90deg);
+    transition-duration: 1s;
+}
+.menu_tray{
+    display: none;
+    width: 60%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background-color: rgb(72, 73, 73);
+    z-index: 5;
+}
+@keyframes open_menu_tray {
+    from{
+        right: -60%;
+    }
+    to{
+        right: 0;
+    }
+}
+@keyframes close_menu_tray {
+    from{
+        right: 0%;
+    }
+    to{
+        right: -60%;
+    }
+}
+header{
+    width: 100%;
+    height: 10%;
+    background-color: rgba(240, 248, 255, 0);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+header h1{
+    margin-left: 5px;
+}
+.close{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.close img{
+    width: 100%;
+    height: 100%;
+}
+
+.menu_tray .body{
+    width: 100%;
+    height: calc(100% - 10%);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.menu_tray .body a i{
+    font-style: normal;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: aliceblue;
+    padding-left: 5px;
+}
+.menu_tray .body a{
+    width: calc(100% - 5px);
+    height: 25px;
+    padding: 5px 0px 5px 0px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.466);
+    border-left: 5px solid rgb(105, 5, 5);
+    cursor: pointer;
+}
+.menu_tray .body a:hover,
+.menu_tray .body .active{
+    background-color: rgba(43, 43, 43, 0.466);
+    border-left: none;
+    border-right: 5px solid rgb(48, 17, 17);
+}
+.title_search{
+    width: fit-content;
+    height: fit-content;
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+}
+b{
+    font-size: 15px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bolder;
+    color: rgb(24, 21, 21);
+}
+.search{
+    width: 200px;
+    height: 25px;
+    background-color: aliceblue;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+}
+.search:hover{
+    transform: scale(1.01);
+    transition-duration: 1s;
+}
+label[for=search]{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+.pop form div{
+    transform: scale(0.9);
+}
+.inputTitle, .textToDo{
+    padding-left: 5px;
+    padding-top: 2px;
+    width: 100%;
+    background-color: rgba(240, 248, 255, 0.37);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.inputTitle input{
+    width: 80%;
+    height: 25px;
+    background-color: rgba(240, 248, 255, 0);
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.432);
+}
+label[for=Title],
+label[for=Todo]{
+    width: 100%;
+}
+textarea[name=todoContent]{
+    min-width: 85%;
+    /* height: fit-content; */
+    min-height: fit-content;
+    max-width: 85%;
+    max-height: 40px;
+    background-color: rgba(240, 248, 255, 0);
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.432);
+}
+label .search_btn{
+    width: fit-content;
+    padding: 1.5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+}
+label .search_btn img{
+    width: 20px;
+    height: 20px;
+}
+label input{
+    width: calc(100% - 20px);
+    height: 100%;
+    outline: none;
+    border: none;
+    background-color: rgba(240, 248, 255, 0);
+}
+main{
+    width: 100%;
+    height: calc(100% - 10%);
+    background-color: rgb(211, 211, 211);
+    
+}
+.main_route{
+    width: 100%;
+    height: calc(100% - 5%);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    /* filter: blur(5px); */
+    z-index: calc(3);
+
+}
+.main_route::-webkit-scrollbar{
+    width: 3px;
+}
+.main_route::-webkit-scrollbar-track{
+    background-color: rgba(255, 255, 255, 0);
+}
+.main_route::-webkit-scrollbar-thumb{
+    background-color: rgb(83, 81, 81);
+}
+.notFound{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+}
+.notFound b{
+    word-wrap: break-word;
+}
+
+.to_do_card{
+    width: 100%;
+    height: fit-content;
+    padding: 2px;
+    background-color: rgb(238, 241, 241);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 4;
+}
+.to_do_card .content{
+    width: 90%;
+    overflow: hidden;
+}
+.todo_title{
+    width: 100%;
+    font-size: 15px;
+    display: flex;
+    gap: 5px;
+    font-weight: normal;
+    text-transform: capitalize;
+}
+.todo_title::before{
+    content: 'Title:';
+    color: rgb(3, 44, 73);
+    font-weight: bold;
+}
+.pop .todo_title{
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 2px 0 5px 0;
+}
+.pop .todo_title::before{
+    content: '';
+}
+.add_todo{
+    width: 100%;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 2px 0 5px 0;
+    display: flex;
+    justify-content: start;
+    padding: 0px 10px 20px 0px;
+}
+.little{
+    width: 100%;
+}
+.time b{
+    font-size: 12px;
+    font-weight: normal;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.to_do_card .action{
+    width: 10%;
+}
+.action .menu_button{
+    width: 20px;
+    height: 20px;
+    gap: 3px;
+    align-items: center;
+}
+.action .menu_dash{
+    width: 3px;
+    height: 3px;
+}
+.to_do_card:first-child{
+    margin-top: 2px;
+}
+.to_do_card:last-child{
+    margin-bottom: 25px;
+}
+
+.todo_popup{
+    width: 80%;
+    height: fit-content;
+    position: absolute;
+    top: 40%;
+    left: 5%;
+    background-color: rgb(168, 166, 166);
+    padding: 10px;
+    border-radius: 10px;
+    z-index: 10;
+}
+.todo_popup .action{
+    width: 100%;
+    margin-top: 5px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+.action button{
+    padding: 5px;
+    background-color: rgba(243, 239, 239, 0.712);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.action #edit, .action #add{
+    background-color: rgb(0, 162, 255);
+}
+.action #close{
+    background-color: rgba(243, 239, 239, 0.712);
+}
+.action #delete{
+    background-color: rgb(78, 8, 8);
+}
+.action #yes{
+    background-color: rgb(9, 73, 110);
+}
+.main_action{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    background-color: rgba(173, 182, 182, 0.014);
+    box-shadow: inset 0px 0px 10px grey;
+    bottom: 20px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.box_cont{
+    width: 35px;
+    padding: 5px 0 5px 0;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    zoom: 100%;
+    /* animation: openboxmenu 2s linear forwards; */
+}
+
+@keyframes openboxmenu {
+    from{
+        transform: scale(0);
+        bottom: -20%;
+    }
+    to{
+        transform: scale(1);
+        bottom: -20%;
+    }
+}
+.box_cont .img{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box_cont img{
+    width: 100%;
+    height: 100%;
+}
+input[type=search]::-webkit-search-cancel-button{
+    display: none;
+}
+
+@keyframes redopacity {
+    from{
+        opacity: 100%;
+    }
+    to{
+        opacity: 20%;
+    }
+}
+@keyframes incopacity {
+    from{
+        opacity: 20%;
+    }
+    to{
+        opacity: 100%;
+    }
+}
+#me{
+    width: 100%;
+    height: 100%;
+}
