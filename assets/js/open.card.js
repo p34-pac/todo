@@ -1,5 +1,11 @@
-import { del, edit, todo } from "./index.js";
-import { clickedSomeWhereOnApp } from "./toggle.menu.js";
+import { del, edit} from "./index.js";
+import { clickedSomeWhereOnApp, close_menu, menu_opened } from "./toggle.menu.js";
+let todo;
+try {
+    todo = JSON.parse(localStorage.getItem("todos"))
+} catch (error) {
+    
+}
 
 let main = document.getElementById('main');
 let app = document.getElementById('app');
@@ -10,16 +16,21 @@ export function openCardPopup(id){
 
 function showPopUp(id){
     if(main.children.length>1){
-        removePopup()
-        pop(id)
-        blur(1)
-        app.removeEventListener('click', clickedSomeWhereOnApp);
-        document.querySelector('.main_route').addEventListener('click', removePopup)
+        if(menu_opened == false){
+            removePopup()
+            pop(id)
+            blur(1)
+            app.removeEventListener('click', clickedSomeWhereOnApp);
+            document.querySelector('.main_route').addEventListener('click', removePopup)
+
+        }
     }else{
-        pop(id)
-        blur(1)
-        app.removeEventListener('click', clickedSomeWhereOnApp);
-        document.querySelector('.main_route').addEventListener('click', removePopup)
+            if(menu_opened == false){
+                pop(id)
+                blur(1)
+                app.removeEventListener('click', clickedSomeWhereOnApp);
+                document.querySelector('.main_route').addEventListener('click', removePopup)
+            }
     }
 }
 
@@ -38,6 +49,10 @@ export function removePopup(){
 }
 
 function pop(id){
+    try {
+        close_menu()
+    } catch (error) {}
+    todo = JSON.parse(localStorage.getItem("todos"))
     let popup = document.createElement('div');
     popup.className = 'todo_popup';
     todo.forEach(todo => {
@@ -59,11 +74,16 @@ function pop(id){
             main.appendChild(popup);
         }
     });
-    document.getElementById('edit').addEventListener('click', edit)
-    document.getElementById('delete').addEventListener('click', del)
-        
-        
+    try {
+        document.getElementById('edit').addEventListener('click', edit)
+        document.getElementById('delete').addEventListener('click', del)
         document.getElementById('closePopup').addEventListener('click', removePopup)
+    } catch (error) {
+        
+    }
+        
+        
+        
 }
 
 export function blur(decision){

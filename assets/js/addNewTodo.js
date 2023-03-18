@@ -1,9 +1,19 @@
-import { todo } from "./index.js";
+import { reloadId, showTodo} from "./index.js";
 import { removePopup } from "./open.card.js";
-import { clickedSomeWhereOnApp } from "./toggle.menu.js";
-
-export function addNewTodo(){
-    let id = todo.length;
+let todo;
+try {
+    todo = JSON.parse(localStorage.getItem("todos"))
+} catch (error) {
+    
+}export function addNewTodo(){
+    let id;
+    try {
+        id = todo.length;
+    } catch (error) {
+        id = 0;
+    }
+    
+    
     let titleText, contentText;
     titleText = document.getElementById('todoTitle').value,
     contentText = document.getElementById('todoContent').value;
@@ -19,12 +29,27 @@ export function addNewTodo(){
         date: `${h}:${m} AM, ${day}-${mon}-${year}`,
         id
     }
-    todo.push(newTodo)
-    displayTodosAgain()
+    let todoo;
+    if(localStorage.getItem("todos") === null || localStorage.getItem("todos") === ''){
+        todoo = [];
+        localStorage.setItem("todos", todoo)
+        // todoo = JSON.parse(localStorage.getItem("todos"))
+    }else{
+        try {
+            todoo = JSON.parse(localStorage.getItem("todos"))
+        } catch (error) {
+            
+        }    
+    }
+    todoo.push(newTodo);
+    localStorage.setItem("todos", JSON.stringify(todoo));
+    setInterval(displayTodosAgain(), 500);
 }
 
 export function displayTodosAgain(){
     blur(1)
+    reloadId();
+    todo = JSON.parse(localStorage.getItem("todos"))
     document.querySelector('.main_route').innerHTML = '';
     setTimeout(blur(0), 500)
     todo.forEach(item => {

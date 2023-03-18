@@ -1,13 +1,33 @@
-import { todos } from "../../data/db.js";
 import { addNewTodo } from "./addNewTodo.js";
 import { blur, removePopup } from "./open.card.js";
 import { search } from "./search.js";
 import { clickedSomeWhereOnApp } from "./toggle.menu.js";
-export const todo = todos();
-if(!localStorage.getItem('todos')){
+let todo;
+try {
+    todo = JSON.parse(localStorage.getItem("todos"))
+} catch (error) {
+    
+}if(!localStorage.getItem('todos')){
     localStorage.setItem('todos', [])
 }
-showTodo()
+try {
+    showTodo()
+} catch (error) {
+    
+}
+export function reloadId(){
+    try {
+        todo = JSON.parse(localStorage.getItem("todos"));
+        let newid = -1;
+        todo.forEach(i => {
+                newid++;
+                i.id = newid;
+        });
+        localStorage.setItem("todos", JSON.stringify(todo))
+    } catch (error) {
+        
+    }
+}
 
 
 let app = document.getElementById('app');
@@ -38,17 +58,20 @@ function openAddNewTodo(){
         </form>
     </div>
     <div class="action">
-        <button id="add" class="id-${todo.id}">Add</button>
+        <button id="add" class="id">Add</button>
         <button id="closePopup">cancel</button>
     </div>
     `;
     main.appendChild(popup);
     document.getElementById('closePopup').addEventListener('click', removePopup);
     document.getElementById('add').addEventListener('click', addNewTodo)
+    
     blur(1)
 }
+localStorage.setItem('todo', {})
 export function showTodo(){
     blur(1)
+    todo = JSON.parse(localStorage.getItem("todos"))
     document.querySelector('.main_route').innerHTML = ''
     setTimeout(blur(0), 500)
     todo.forEach(item => {
@@ -73,21 +96,15 @@ export function showTodo(){
             </div>
         `;
     });
+    reloadId()
 }
-function lod(){
-    todo.forEach(item => {
-        if(item.id == 2){
-            item.content = 'this is 2';
-    }
-    });
-    showTodo()
-}
-lod()
+
+
 export function edit(e){
     let id = getid(e.target.className);
-    todo.forEach((todo)=>{
-        if(todo.id == id){
-            console.log(todo)
+    let todo = JSON.parse(localStorage.getItem("todos"))
+    todo.forEach((todos)=>{
+        if(todos.id == id){
             try {
                 removePopup()
             } catch (error) {
@@ -98,20 +115,20 @@ export function edit(e){
             popup.className = 'todo_popup';
             popup.innerHTML =  `
             <div class="content pop">
-                <b class="add_todo">Add Todo</b>
+                <b class="add_todo">Edit This Todo</b>
                 <form>
                     <div class="inputTitle">
                         <label for="Title">Title</label>
-                        <input type="text" placeholder="Title" id="todoTitle" value="${todo.title}">
+                        <input type="text" placeholder="Title" id="todoTitle" value="${todos.title}">
                     </div>
                     <div class="textToDo">
                         <label for="Todo">Todo</label>
-                        <textarea name="todoContent" rows="1" placeholder="Type ToDo here" id="todoContent">${todo.content}</textarea>
+                        <textarea name="todoContent" rows="1" placeholder="Type ToDo here" id="todoContent">${todos.content}</textarea>
                     </div>
                 </form>
             </div>
             <div class="action">
-                <button id="save" class="id-${todo.id}">save</button>
+                <button id="save" class="id-${todos.id}">save</button>
                 <button id="closePopup">cancel</button>
             </div>
             `;
@@ -120,12 +137,20 @@ export function edit(e){
             document.getElementById('save').addEventListener('click', saving)
             blur(1)
             function saving(){
-                save(todo)
+                let ret = document.getElementById('todoTitle').value;
+                let rec = document.getElementById('todoContent').value;
+                todos.content = rec;
+                todos.title = ret;
+                localStorage.setItem("todos", JSON.stringify(todo))
+                showTodo()
+                removePopup()
             }
         }
     })
+    reloadId()
 }
 export function del(e){
+    todo = JSON.parse(localStorage.getItem("todos"))
     blur(1)
     let main = document.getElementById('main');
     let id = getid(e.target.className);
@@ -149,7 +174,14 @@ export function del(e){
     document.getElementById('yes').addEventListener('click', goOn)
     document.getElementById('closePopup').addEventListener('click', removePopup)
     function goOn(){
-        delete todo[id]
+        todo.splice(id, 1)
+        let newid = -1;
+        todo.forEach(i => {
+                newid++;
+                i.id = newid;
+        });
+        localStorage.setItem("todos", JSON.stringify(todo))
+        reloadId()
         showTodo()
         removePopup()
         blur(0)
@@ -157,14 +189,7 @@ export function del(e){
     
     
 }
-function save(todo){
-    let ret = document.getElementById('todoTitle').value;
-    let rec = document.getElementById('todoContent').value;
-    todo.content = rec;
-    todo.title = ret;
-    showTodo()
-    removePopup()
-}
+
 function getid(from){
     let whole = from.split('-');
     let id = whole[whole.length - 1]

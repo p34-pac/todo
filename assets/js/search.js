@@ -1,5 +1,10 @@
-import { showTodo, todo } from "./index.js";
-
+import { showTodo} from "./index.js";
+let todo;
+try {
+    todo = JSON.parse(localStorage.getItem("todos"))
+} catch (error) {
+    
+}
 
 
 export function search(e){
@@ -53,7 +58,6 @@ export function search(e){
 // }
 let searchbar = document.getElementById('searchbar')
 searchbar.click((e)=>{
-    console.log(e)
 })
 
 

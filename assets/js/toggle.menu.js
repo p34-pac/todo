@@ -1,10 +1,12 @@
+import { reloadId } from "./index.js";
 import { blur, openCardPopup } from "./open.card.js";
-
+export let menu_opened = false;
 let app = document.getElementById('app');
 let menu_tray = document.querySelector('.menu_tray');
 app.addEventListener('click', clickedSomeWhereOnApp);
 
 export function clickedSomeWhereOnApp(e){
+    reloadId()
     let target;
     if(e.target.classList.contains('open_menu')){
         target = e.target;
@@ -42,12 +44,14 @@ function action(menu){
 }
 
 function open_menu(){
+    menu_opened = true;
     menu_tray.style.display = 'block';
     menu_tray.style.animation = 'open_menu_tray 0.5s linear';
     blur(1)
     document.getElementById('searchbar').style.display = 'none'
 }
-function close_menu(){
+export function close_menu(){
+    menu_opened = false;
     menu_tray.style.animation = 'close_menu_tray 0.5s linear';
     blur(0)
     document.getElementById('searchbar').style.display = 'block'

@@ -1,3 +1,6 @@
+*{
+    word-wrap: break-word;
+}
 body{
     width: 100%;
     height: 100%;
@@ -9,20 +12,59 @@ body{
 }
 
 #app{
-    
     height: 570px;
     width: 300px;
-    background-color: aliceblue;
+    background-color: rgba(97, 99, 99, 0.705);
     box-shadow: 10px 10px 10px rgb(46, 46, 46);
     border-radius: 20px;
     overflow: hidden;
     position: absolute;
-    top: 5%;
+    top: 2%;
+}
+.top_notch_bar{
+    width: 100%;
+    height: 5%;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    justify-content: center;
+}
+.top_notch{
+    width: 150px;
+    height: 90%;
+    background-color: black;
+    border-radius: 10px 10px 10px 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+    zoom: 80%;
+    position: absolute;
+    top: 5px;
+}
+.camera{
+    width: 10px;
+    height: 10px;
+    background-color: rgba(240, 248, 255, 0.075);
+    border-radius: 50%;    
+}
+.smallDot{
+    width: 5px;
+    height: 5px;
+    background-color: rgba(240, 248, 255, 0.075);
+    border-radius: 50%;   
+}
+
+.speaker{
+    width: 60px;
+    height: 3px;
+    background-color: rgba(240, 248, 255, 0.158);
+    border-radius: 2px;
 }
 nav{
+    margin-top: 10px;
     width: 100%;
     height: 10%;
-    background-color: rgba(97, 99, 99, 0.705);
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
@@ -52,9 +94,9 @@ nav{
 .menu_tray{
     display: none;
     width: 60%;
-    height: 100%;
+    height: 95%;
     position: absolute;
-    top: 0;
+    bottom: 0;
     background-color: rgb(72, 73, 73);
     z-index: 5;
 }
@@ -214,7 +256,7 @@ label input{
 }
 main{
     width: 100%;
-    height: calc(100% - 10%);
+    height: calc(100% - 15%);
     background-color: rgb(211, 211, 211);
     
 }
@@ -301,6 +343,7 @@ main{
 .little{
     width: 100%;
 }
+
 .time b{
     font-size: 12px;
     font-weight: normal;
